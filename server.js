@@ -4,6 +4,11 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+// parse incoming string or array data
+app.use(express.urlencoded({ extended: true }));
+// parse incoming JSON data
+app.use(express.json());
+
 const { animals } = require('./data/animals');
 
 
@@ -73,6 +78,13 @@ app.get('/api/animals', (req, res) => {
     }
     res.json(results);
 }); 
+
+
+app.post('/api/animal', (req, res) => {
+    // req.body is where our incoming content will be
+    console.log(req.body);
+    res.json(req.body);
+});
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
